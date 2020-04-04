@@ -1,0 +1,1 @@
+To any employers interested: if you wish to see the full solutions for problems that I have solved from 'projecteuler.net', you will have to contact me via e-mail and ask to see them. This is because 'github.com' doesn't allow me to give specific individuals read access to the private repository I have that contains the answers.
