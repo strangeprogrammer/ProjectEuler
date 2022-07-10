@@ -15,17 +15,11 @@ def isPrime(n):
 	
 	makePrimes(n)
 	
-	if any(map(
-		lambda p: n % p == 0,
-		primes
-	)):
-		return False
-	else:
-		return True
+	return n in primes
 
 def makePrimes(n):
 	global primes
-	while primes[-1] < sqrt(n):
+	while primes[-1] < n:
 		makePrime()
 
 def makePrime():
