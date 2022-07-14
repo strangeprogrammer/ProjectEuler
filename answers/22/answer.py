@@ -2,13 +2,9 @@
 
 from functools import reduce
 
-filename = "p022_names.txt"
-
 def getnames():
-	global filename
-	with open(filename) as fnames:
+	with open('p022_names.txt', 'r') as fnames:
 		namelist = fnames.readline().replace("\"", "").split(sep = ",")
-		fnames.close()
 	return sorted(namelist)
 
 scoreletter = lambda c: ord(c) - ord('A') + 1
