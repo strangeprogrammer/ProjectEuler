@@ -6,19 +6,17 @@ from os import path
 from multiprocessing import Pool
 import subprocess
 
-gwt = os.getenv('GIT_WORK_TREE')
-if gwt is None:
-	raise Exception("Environment variable 'GIT_WORK_TREE' wasn't set...")
+top = os.getcwd()
 
 def tobytes(s):
 	return bytes(map(ord, s))
 
 def grader(t):
-	global gwt
+	global top
 	[number, answer] = t
 	
 	cwd = path.join(
-		gwt,
+		top,
 		'answers',
 		number,
 	)
@@ -30,12 +28,10 @@ def grader(t):
 	return [int(number), x.stdout == tobytes(answer + '\n')]
 
 def main():
-	global gwt
+	global top
 	
 	answers = []
-	with open(
-		path.join(gwt, 'answers.txt'),
-	'r') as fp:
+	with open(path.join(top, 'answers.txt'), 'r') as fp:
 		answers = fp.readlines()
 	
 	answers = list(map(
