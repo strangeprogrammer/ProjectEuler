@@ -34,6 +34,10 @@ class primesproxy:
 		while True:
 			yield self.__get__(i)
 			i += 1
+	
+	def __contains__(self, x):
+		makePrimes(x)
+		return x in self.p
 
 primes = primesproxy()
 
