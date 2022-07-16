@@ -21,18 +21,25 @@ class primesproxy:
 		while len(self.p) < i + 1:
 			makePrime()
 	
-	def __get__(self, i):
-		self._genindex(i)
-		return self.p[i]
+	def __getitem__(self, i):
+		if type(i) == slice:
+			if i.stop < i.start:
+				self._genindex(i.start)
+			else:
+				self._genindex(i.stop)
+			return self.p[i]
+		else:
+			self._genindex(i)
+			return self.p[i]
 	
-	def __set__(self, i, v):
+	def __setitem__(self, i, v):
 		self._genindex(i)
 		self.p[i] = v
 	
 	def __iter__(self):
 		i = 0
 		while True:
-			yield self.__get__(i)
+			yield self[i]
 			i += 1
 	
 	def __contains__(self, x):
