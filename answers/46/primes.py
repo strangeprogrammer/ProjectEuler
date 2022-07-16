@@ -1,1 +1,1 @@
-../pytools/primes.py
+../tools/primes.py
