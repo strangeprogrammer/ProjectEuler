@@ -21,11 +21,19 @@ def grader(t):
 		number,
 	)
 	
+	if subprocess.run([
+		'make', '--silent', '.result.txt',
+	], cwd = cwd).returncode != 0:
+		return [int(number), False]
+	
 	x = subprocess.run([
-		path.join(cwd, 'answer.py')
+		'cat', '.result.txt',
 	], cwd = cwd, stdout = subprocess.PIPE)
 	
-	return [int(number), x.stdout == tobytes(answer + '\n')]
+	return [
+		int(number),
+		x.returncode == 0 and x.stdout == tobytes(answer + '\n')
+	]
 
 def main():
 	global top
