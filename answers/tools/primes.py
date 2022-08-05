@@ -11,11 +11,13 @@ __all__ = [
 ]
 
 rawprimes = [2, 3, 5, 7, 11]
+primesset = set(rawprimes)
 
 class primesproxy:
 	def __init__(self):
-		global rawprimes
+		global rawprimes, primesset
 		self.p = rawprimes
+		self.q = primesset
 	
 	def _genindex(self, i):
 		while len(self.p) < i + 1:
@@ -32,10 +34,6 @@ class primesproxy:
 			self._genindex(i)
 			return self.p[i]
 	
-	def __setitem__(self, i, v):
-		self._genindex(i)
-		self.p[i] = v
-	
 	def __iter__(self):
 		i = 0
 		while True:
@@ -44,16 +42,16 @@ class primesproxy:
 	
 	def __contains__(self, x):
 		makePrimes(x)
-		return x in self.p
+		return x in self.q
 
 primes = primesproxy()
 
 def isPrime(n):
-	global rawprimes
+	global primesset
 	
 	makePrimes(n)
 	
-	return n in rawprimes
+	return n in primesset
 
 def makePrimes(n):
 	global rawprimes
@@ -61,7 +59,7 @@ def makePrimes(n):
 		makePrime()
 
 def makePrime():
-	global rawprimes
+	global rawprimes, primesset
 	
 	i = rawprimes[-1] + 2
 	while True:
@@ -77,7 +75,8 @@ def makePrime():
 				break
 		
 		if canappend:
-			rawprimes.append(i)
+			rawprimes += [i]
+			primesset |= {i}
 			return
 		else:
 			i += 2
