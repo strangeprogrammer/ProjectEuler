@@ -41,8 +41,18 @@ class primesproxy:
 			i += 1
 	
 	def __contains__(self, x):
-		makePrimes(x)
-		return x in self.q
+		if x < 1000000:
+			makePrimes(x)
+			return x in self.q
+		else:
+			i = 0
+			limit = sqrt(x) + 1
+			makePrimes(limit)
+			while self[i] < limit:
+				if x % self[i] == 0:
+					return False
+				i += 1
+			return True
 
 primes = primesproxy()
 
