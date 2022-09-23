@@ -40,10 +40,14 @@ class ffable:
 			return next(self.gen)
 	
 	def ff(self, predicate):
+		if self.forwarded and predicate(self.recent):
+			return self
+		
 		for item in self.gen:
 			if predicate(item):
 				[self.recent, self.forwarded] = [item, True]
 				break
+		return self
 
 class indexable():
 	def __init__(self, gen):
