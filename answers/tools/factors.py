@@ -10,11 +10,12 @@ import operator
 from math import sqrt
 
 __all__ = [
+	'factors_list',
 	'factors',
 	'divisors',
 ]
 
-def factors_(n):
+def factors_list(n):
 	global primes
 	
 	if n <= 1:
@@ -26,12 +27,12 @@ def factors_(n):
 			divisor = i
 			break
 	
-	return [divisor, *factors_(n // divisor)]
+	return [divisor, *factors_list(n // divisor)]
 
 def factors(n):
 	if n == 1:
 		return [(1, 1)]
-	l0 = sorted(factors_(n))
+	l0 = sorted(factors_list(n))
 	facts = []
 	while 0 < len(l0):
 		l1 = list(
