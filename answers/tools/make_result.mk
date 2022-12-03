@@ -16,5 +16,9 @@ ifeq (true,$(call FEXISTS,factors.py))
 FACTORS_PY:=../tools/factors.py
 endif
 
-.result.txt : answer.py $(MEMOIZE_PY) $(PRIMES_PY) $(GENTOOLS_PY) $(FACTORS_PY)
+ifeq (true,$(call FEXISTS,gradientmu.py))
+GRADIENTMU_PY:=../tools/gradientmu.py
+endif
+
+.result.txt : answer.py $(MEMOIZE_PY) $(PRIMES_PY) $(GENTOOLS_PY) $(FACTORS_PY) $(GRADIENTMU_PY)
 	./$< >$@
